@@ -24,8 +24,12 @@ class PizzaService {
     }
 
     @Transactional
-    fun delete(id: Long) {
-        pizzaRepository.deleteById(id)
+    fun delete(id: Long): PizzaResponseDTO {
+        val pizza = pizzaRepository.findById(id)
+
+        pizzaRepository.deleteById(pizza.id)
+
+        return PizzaResponseDTO.valueOf(pizza)
     }
 
     fun findById(id: Long): PizzaResponseDTO {

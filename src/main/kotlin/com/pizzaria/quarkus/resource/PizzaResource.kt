@@ -7,6 +7,7 @@ import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
 import jakarta.ws.rs.core.Response
 import jakarta.ws.rs.core.Response.Status
+import org.jboss.logging.Logger
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -27,6 +28,13 @@ class PizzaResource {
     fun findAll(): Response {
         return Response
             .ok(pizzaService.findAll())
+            .build()
+    }
+
+    @DELETE
+    fun deleteById(id: Long): Response {
+        return Response
+            .ok(pizzaService.delete(id))
             .build()
     }
 
